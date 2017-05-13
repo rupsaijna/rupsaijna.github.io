@@ -1,0 +1,16 @@
+<html>
+<body>
+
+Select your favorite color: <input type="color" id="myColor" onchange="myFunction()">
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("myColor").value;
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+var w=500;
+var h =500;
+var d=16;
+
+var bg=document.getElementById('bg');
+var ctxbg=bg.getContext('2d');
+bg.width = w;
+bg.height = h;
+ctxbg.translate(bg.width/2, bg.width/2);
+
+var canvas = document.getElementById('paint');
+var ctx = canvas.getContext('2d');
+
+var sketch = document.getElementById('sketch');
+var sketch_style = getComputedStyle(sketch);
+canvas.width = w;
+canvas.height = h;
+ctx.translate(canvas.width/2, canvas.width/2);
+var mouse = {x: 0, y: 0,xp:0,yp:0};
+var refl={xb:0,yb:0,xe:0,ye:0};
+
+var refl_x=[];
+var refl_y=[];
+var slope=[];
+
+
+function toRadians (angle) {
+  return angle * (Math.PI / 180);
+}
+
+function divide_canvas(num_parts){
+  part_angle=360/num_parts;
+  ctxbg.strokeStyle="red";
+  ctxbg.beginPath();
+  for (i=1;i<=num_parts;i++){
+    angle=part_angle*i;
+    ctxbg.moveTo(0,0);    
+ ctxbg.lineTo(0+canvas.width*2*Math.cos(toRadians(angle)), 0+canvas.height*2*Math.sin(toRadians(angle)));
+    slope.push(canvas.width*2*Math.cos(toRadians(angle))/canvas.height*2*Math.sin(toRadians(angle)));
+  }
+  ctxbg.stroke(); 
+};
+
+//divide_canvas(d);
+
+function get_reflection_slope(cox,coy,m){
+  xr=((1-m*m)*cox+2*m*coy)/(1+m*m);
+  xy=(2*m*cox-(1-m*m)*coy)/(1+m*m);
+  return [xr,xy];
+}
+
+function get_reflection(cox,coy,angle){
+  angle=toRadians(angle);
+  x_ref=Math.cos(angle)*cox-Math.sin(angle)*coy;
+  y_ref=Math.sin(angle)*cox+Math.cos(angle)*coy;
+  return [x_ref,y_ref];  
+}
+
+/* Mouse Capturing Work */
+canvas.addEventListener('mousemove', function(e) {
+  mouse.x = e.pageX - this.offsetLeft-w/2;
+  mouse.y = e.pageY - this.offsetTop-h/2;
+}, false);
+
+/* Drawing on Paint App */
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+
+ctx.strokeStyle = "red";
+function getColor(colour){ctx.strokeStyle = colour;}
+
+function getSize(size){ctx.lineWidth = size;}
+
+function divcan(parts){divide_canvas(parts); d=parts; document.getElementById('divi').style.visibility='hidden'; }
+//ctx.strokeStyle = 
+//ctx.strokeStyle = document.settings.colour[1].value;
+ 
+canvas.addEventListener('mousedown', function(e) {
+    ctx.beginPath();
+    ctx.moveTo(mouse.x, mouse.y);
+ 
+    canvas.addEventListener('mousemove', onPaint, false);
+}, false);
+ 
+canvas.addEventListener('mouseup', function() {
+    canvas.removeEventListener('mousemove', onPaint, false);
+    paint_reflection();
+}, false);
+ 
+var onPaint = function() {
+    ctx.lineTo(mouse.x, mouse.y);
+    ctx.stroke();   
+  refl_x.push(mouse.x);
+  refl_y.push(mouse.y);
+};
+
+function paint_reflection(){
+  
+
+  for(j=1;j<d;j++){
+	ctx.beginPath();
+	  rr=get_reflection(refl_x[0], refl_y[0], j*360/d);
+	  ctx.moveTo(rr[0],rr[1]);
+	  for (i=1;i<refl_x.length;i++){
+		rr=get_reflection(refl_x[i], refl_y[i], j*360/d);
+	    	ctx.lineTo(rr[0],rr[1]);
+	  }
+	
+	  ctx.stroke();
+	  
+	}
+refl_x=[];
+	  refl_y=[];
+ctx.strokeStyle="red";
+}
