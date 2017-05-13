@@ -1,7 +1,7 @@
 
 *{font-family:sans-serif;}
 
-.settings { display: block; background : rgba(20,20,20,0.3)}
+.settings { display: block; background-color : rgba(20,20,20,0.1)}
 
 
 #paint {border: 1px solid black; background : rgba(250,250,250,0.5);  display: block;}
