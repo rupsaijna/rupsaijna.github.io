@@ -18,24 +18,6 @@ var ctx = canvas.getContext('2d');
 
 
 
-// Prevent scrolling when touching the canvas
-document.body.addEventListener("touchstart", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
-document.body.addEventListener("touchend", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
-document.body.addEventListener("touchmove", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
-
-
 var sketch = document.getElementById('sketch');
 var sketch_style = getComputedStyle(sketch);
 canvas.width = w;
@@ -86,12 +68,6 @@ function get_reflection(cox,coy,angle){
 canvas.addEventListener('mousemove', function(e) {
   mouse.x = e.pageX - this.offsetLeft-w/2;
   mouse.y = e.pageY - this.offsetTop-h/2;
-}, false);
-
-/* Mouse Capturing Work */
-canvas.addEventListener('touchmove', function(e) {
-  touch.x = e.pageX - this.offsetLeft-w/2;
-  touch.y = e.pageY - this.offsetTop-h/2;
 }, false);
 
 ctx.strokeStyle = "red";
@@ -152,21 +128,9 @@ canvas.addEventListener('mousedown', function(e) {
  
     canvas.addEventListener('mousemove', onPaint, false);
 }, false);
-
-canvas.addEventListener('touchstart', function(e) {
-    ctx.beginPath();
-    ctx.moveTo(touch.x, touch.y);
- 
-    canvas.addEventListener('touchmove', onPaint_t, false);
-}, false);
  
 canvas.addEventListener('mouseup', function() {
     canvas.removeEventListener('mousemove', onPaint, false);
-    paint_reflection();
-}, false);
-
-canvas.addEventListener('touchend', function() {
-    canvas.removeEventListener('touchmove', onPaint_t, false);
     paint_reflection();
 }, false);
  
@@ -181,19 +145,6 @@ var onPaint = function() {
 	  ctx.stroke();
 		
 };
-
-var onPaint_t = function() {
-    ctx.lineTo(touch.x, touch.y);
-    ctx.stroke();   
-  refl_x.push(touch.x);
-  refl_y.push(touch.y);
- if (fill==1)	
-	{//ctx.fillStyle = "blue";
-	ctx.fill();}
-	  ctx.stroke();
-		
-};
-
 
 function paint_reflection(){
   
