@@ -1,7 +1,7 @@
 
 *{font-family:sans-serif;}
 
-.settings { display: block; text-align:center}
+.settings { display: block; }
 
 
 #paint {border: 1px solid black; background : rgba(250,250,250,0.5);  display: block;}

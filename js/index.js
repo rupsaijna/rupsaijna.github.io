@@ -81,7 +81,16 @@ function getEraser(){
 	else {document.getElementById("eraser").style.background=''; ctx.strokeStyle =color; }
 }
 
-function getSize(size){ctx.lineWidth = size;document.getElementById(size).innerHTML="<textbf>"+size+"</textbf>"}
+function getSize(size){
+	ctx.lineWidth = size; 
+	var children=document.getElementById('brush').children;
+	var bid='b'+size;
+	for (var i = 0; i < children.length; i++) {
+		children[i].style.background="";	
+	}
+	document.getElementById(bid).style.background='#EEFFFF';
+	}
+}
 
 function save(){
 	var dataURL = canvas.toDataURL();
