@@ -9,8 +9,8 @@ var fill=0;
 
 var bg=document.getElementById('bg');
 var ctxbg=bg.getContext('2d');
-bg.width = w;
-bg.height = h;
+bg.width = 65%;
+bg.height = bg.width;
 ctxbg.translate(bg.width/2, bg.width/2);
 
 var canvas = document.getElementById('paint');
@@ -20,8 +20,8 @@ var ctx = canvas.getContext('2d');
 
 var sketch = document.getElementById('sketch');
 var sketch_style = getComputedStyle(sketch);
-canvas.width = w;
-canvas.height = h;
+canvas.width = 65%;
+canvas.height = canvas.width;
 ctx.translate(canvas.width/2, canvas.width/2);
 var mouse = {x: 0, y: 0,xp:0,yp:0};
 var refl={xb:0,yb:0,xe:0,ye:0};
