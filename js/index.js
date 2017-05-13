@@ -77,7 +77,7 @@ function getFillColor(){fillcolor= document.getElementById("myColorFill").value;
 
 function getEraser(){
 	window.alert(eraser);
-	if (eraser==0){ctx.strokeStyle = '#fff';document.getElementById("eraser").style.background='#EEFFFF';eraser=1;}
+	if (eraser==0){ctx.strokeStyle = 'rgba(250,250,250,0.5)';document.getElementById("eraser").style.background='#EEFFFF';eraser=1;}
 	else {document.getElementById("eraser").style.background=''; ctx.strokeStyle =color; }
 }
 
