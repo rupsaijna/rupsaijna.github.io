@@ -3,7 +3,6 @@
 
 .settings { display: block; margin : 10px;}
 
-#all_settings{background-color : rgba(20,20,20,0.1);}
 
 #paint {border: 1px solid black; background : rgba(250,250,250,0.5);  display: block;}
 #bg {border: 1px solid black; background : #fff; margin-left: auto; margin-right: auto; display: block;}
