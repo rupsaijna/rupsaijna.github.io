@@ -89,7 +89,6 @@ function getSize(size){
 		children[i].style.background="";	
 	}
 	document.getElementById(bid).style.background='#EEFFFF';
-	}
 }
 
 function save(){
